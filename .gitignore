@@ -1,0 +1,12 @@
+logs
+*.log
+npm-debug.log*
+node_modules
+build
+bin
+out
+dist
+.npm
+.env
+.idea
+*.iml
