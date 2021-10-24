@@ -2,6 +2,25 @@
   "name": "topssh",
   "version": "0.0.0",
   "private": true,
+  "watch": {
+    "lint:client": {
+      "patterns": [
+        "client"
+      ],
+      "extensions": "ts, tsx, js",
+      "ignore": [
+        "client/public"
+      ],
+      "verbose": true
+    },
+    "lint:server": {
+      "patterns": [
+        "server"
+      ],
+      "extensions": "ts",
+      "verbose": true
+    }
+  },
   "scripts": {
     "start": "node ./build/server/src/index.js",
     "build:server": "npm run lint:server && tsc --project ./server",
@@ -10,9 +29,11 @@
     "lint:client": "eslint './client/**/*'",
     "lint:server": "eslint './server/src/**/*'",
     "lint": "npm run lint:client && npm run lint:server",
-    "watch:webpack": "webpack --watch --progress --config ./client/webpack/webpack.dev.ts",
-    "watch:client": "watch 'npm run lint:client && webpack --progress --config ./client/webpack/webpack.dev.ts' ./client/src -d -u",
-    "start:dev": "ts-node ./server/src/index.ts",
+    "watch:lint:client": "npm-watch lint:client",
+    "watch:lint:server": "npm-watch lint:server",
+    "watch:webpack": "webpack --watch --config ./client/webpack/webpack.dev.ts",
+    "watch": "concurrently \"npm-watch\" \"npm run watch:webpack\"",
+    "start:dev": "npm run build:dev:client && ts-node ./server/src/index.ts",
     "build:dev:server": "npm run lint:server && tsc --project ./server",
     "build:dev:client": "npm run lint:client && webpack --progress --config ./client/webpack/webpack.dev.ts",
     "build:dev": "npm run build:dev:server && npm run build:dev:client"
@@ -44,6 +65,7 @@
     "@typescript-eslint/eslint-plugin": "^5.1.0",
     "@typescript-eslint/parser": "^5.1.0",
     "clean-webpack-plugin": "^4.0.0",
+    "concurrently": "^6.3.0",
     "copy-webpack-plugin": "^9.0.1",
     "css-loader": "^6.4.0",
     "eslint": "^7.32.0",
@@ -54,6 +76,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "mini-css-extract-plugin": "^2.4.3",
     "nodemon": "^2.0.14",
+    "npm-watch": "^0.11.0",
     "prettier": "^2.4.1",
     "source-map-loader": "^3.0.0",
     "svg-url-loader": "^7.1.1",
@@ -61,7 +84,6 @@
     "ts-loader": "^9.2.6",
     "ts-node": "^10.4.0",
     "typescript": "^4.4.4",
-    "watch": "^0.13.0",
     "webpack": "^5.59.1",
     "webpack-cli": "^4.9.1",
     "webpack-merge": "^5.8.0"
