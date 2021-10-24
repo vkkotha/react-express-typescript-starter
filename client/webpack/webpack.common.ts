@@ -9,7 +9,7 @@ const config = {
     extensions: ['.ts', '.tsx', '.js'],
   },
   entry: {
-    topssh: './client/src/index.ts',
+    topssh: './client/src/index.tsx',
   },
   plugins: [
     new CleanWebpackPlugin(),
@@ -37,6 +37,11 @@ const config = {
       {
         test: /\.js$/,
         loader: 'source-map-loader',
+      },
+      // Load svg files
+      {
+        test: /\.svg$/,
+        loader: 'svg-url-loader',
       },
     ],
   },

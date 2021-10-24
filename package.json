@@ -3,13 +3,14 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./build/server/index.js",
+    "start": "node ./build/server/src/index.js",
     "build:server": "npm run lint:server && tsc --project ./server",
     "build:client": "npm run lint:client && webpack --progress --config ./client/webpack/webpack.production.ts",
     "build": "npm run build:server && npm run build:client",
     "lint:client": "eslint './client/**/*'",
     "lint:server": "eslint './server/src/**/*'",
     "lint": "npm run lint:client && npm run lint:server",
+    "watch:webpack": "webpack --watch --progress --config ./client/webpack/webpack.dev.ts",
     "watch:client": "watch 'npm run lint:client && webpack --progress --config ./client/webpack/webpack.dev.ts' ./client/src -d -u",
     "start:dev": "ts-node ./server/src/index.ts",
     "build:dev:server": "npm run lint:server && tsc --project ./server",
@@ -17,10 +18,19 @@
     "build:dev": "npm run build:dev:server && npm run build:dev:client"
   },
   "dependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.0.2",
+    "@types/react": "^17.0.31",
+    "@types/react-dom": "^17.0.10",
     "config": "^3.3.6",
     "cookie-parser": "~1.4.4",
     "express": "~4.16.1",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "web-vitals": "^2.1.2"
   },
   "devDependencies": {
     "@types/config": "^0.0.39",
@@ -35,6 +45,7 @@
     "@typescript-eslint/parser": "^5.1.0",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^9.0.1",
+    "css-loader": "^6.4.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-import-resolver-typescript": "^2.5.0",
@@ -44,6 +55,8 @@
     "mini-css-extract-plugin": "^2.4.3",
     "nodemon": "^2.0.14",
     "prettier": "^2.4.1",
+    "source-map-loader": "^3.0.0",
+    "svg-url-loader": "^7.1.1",
     "terser-webpack-plugin": "^5.2.4",
     "ts-loader": "^9.2.6",
     "ts-node": "^10.4.0",
