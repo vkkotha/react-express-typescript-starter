@@ -10,3 +10,5 @@ dist
 .env
 .idea
 *.iml
+client/public/app/**
+client/public/index.html
