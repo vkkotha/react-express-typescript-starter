@@ -1,7 +1,8 @@
 import path from 'path';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
-import CopyWebpackPlugin from 'copy-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+const HtmlBeautifierPlugin = require('html-beautifier-webpack-plugin');
 
 const config = {
   context: path.resolve('__dirname', '../'),
@@ -13,13 +14,18 @@ const config = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new CopyWebpackPlugin({
-      patterns: [{ from: './client/src/index.html', to: path.resolve(__dirname, '../public') }],
+    new MiniCssExtractPlugin({
+      filename: '[name].bundle.[contenthash].css',
     }),
-    new MiniCssExtractPlugin(),
+    new HtmlWebpackPlugin({
+      publicPath: 'auto',
+      filename: '../index.html',
+      template: path.resolve(__dirname, '../src/index.html'),
+    }),
+    new HtmlBeautifierPlugin(),
   ],
   output: {
-    filename: '[name].bundle.js',
+    filename: '[name].bundle.[chunkhash].js',
     path: path.resolve(__dirname, '../public/app'),
   },
   module: {
@@ -43,7 +49,22 @@ const config = {
         test: /\.svg$/,
         loader: 'svg-url-loader',
       },
+      {
+        test: /\.(png|jpg|jpeg|gif|ico)$/i,
+        type: 'asset/resource',
+      },
     ],
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: 'all',
+        },
+      },
+    },
   },
 };
 
