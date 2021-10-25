@@ -10,7 +10,7 @@ const config = {
     extensions: ['.ts', '.tsx', '.js'],
   },
   entry: {
-    topssh: './client/src/index.tsx',
+    'react-express-typescript-starter': './client/src/index.tsx',
   },
   plugins: [
     new CleanWebpackPlugin(),
