@@ -35,7 +35,7 @@ $ npm run watch
 ```shell script
 $ npm run start:dev
 ```
-- Click on the Printed url from server logs to goto app. [http://localhost:300](http://localhost:3000) by default.
+- Click on the Printed url from server logs to goto app. [http://localhost:3000](http://localhost:3000) by default.
 - Run run on a different port either change config/default.json or run
 ```shell script
 $ PORT=3001 npm run start:dev
