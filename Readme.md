@@ -85,4 +85,4 @@ $ npm run build
 - Deploy Client app on mobile devices. 
 
 ## License
-[MIT License](/blob/master/LICENSE).
+[MIT License](https://github.com/vkkotha/react-express-typescript-starter/blob/master/LICENSE).
