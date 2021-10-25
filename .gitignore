@@ -12,3 +12,4 @@ dist
 *.iml
 client/public/app/**
 client/public/index.html
+.DS_Store
